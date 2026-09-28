@@ -24,9 +24,9 @@ This is the primary endpoint for initiating audio-to-MIDI conversion tasks.
 
 Generated MIDI and optional outputs from a sample audio file:
 
-<a href="https://lalals.s3.amazonaws.com/AudioToMidi/f5b563e5-e414-47ec-989b-255c74d90119.mid" target="_blank">Download MIDI(.mid)</a>
+<a href="https://cdn1.musicgpt.com/conversions/5ff6c41d-9608-4b69-bca1-73b6de9c5d9e/5ff6c41d-9608-4b69-bca1-73b6de9c5d9e.mid" target="_blank">Download MIDI(.mid)</a>
 
-<a href="https://lalals.s3.amazonaws.com/AudioToMidi/f5b563e5-e414-47ec-989b-255c74d90119.wav" target="_blank">Download Sonified MIDI(.wav)</a>
+<a href="https://cdn1.musicgpt.com/conversions/5ff6c41d-9608-4b69-bca1-73b6de9c5d9e/5ff6c41d-9608-4b69-bca1-73b6de9c5d9e.wav" target="_blank">Download Sonified MIDI(.wav)</a>
 
 ---
 
@@ -133,9 +133,9 @@ print(response.json())
 
 ## Common Errors
 
-- **402 Payment Required** (`INSUFFICIENT_CREDITS`): (`INSUFFICIENT_CREDITS`): Your credit balance is insufficient.
-- **422 Unprocessable Entity** (`UNPROCESSABLE_CONTENT`): (`UNPROCESSABLE_CONTENT`): Invalid `audio_path`, missing required parameters, or unsupported audio format.
-- **500 Internal Server Error** (`INTERNAL_SERVER_ERROR`): (`INTERNAL_SERVER_ERROR`): The conversion failed while processing.
+- **402 Payment Required** (`INSUFFICIENT_CREDITS`): Your credit balance is insufficient.
+- **422 Unprocessable Entity** (`UNPROCESSABLE_CONTENT`): Invalid `audio_path`, missing required parameters, or unsupported audio format.
+- **500 Internal Server Error** (`INTERNAL_SERVER_ERROR`): The conversion failed while processing.
 
 See [Handling Errors](/api-documentation/utilities/error) for the error response format and all error codes.
 
