@@ -12,12 +12,12 @@ Below is a list of common error codes returned by the API, along with their desc
 
 | **Code** | **ERROR_CODE** | **Description** |
 |----------|-----------------|----------------|
-| **400** | - | The request is malformed or contains invalid parameters. Check that all required parameters are included and correctly formatted. |
+| **400** | BAD_REQUEST | The request is malformed or contains invalid parameters. Check that all required parameters are included and correctly formatted. |
 | **401** | UNAUTHORIZED_ACCESS | The request does not include valid authorization. Check that your API key or credentials are correct and properly configured. |
 | **402** | INSUFFICIENT_CREDITS | Your account has insufficient credits to process the request. Add credits or check your account balance. |
 | **403** | FORBIDDEN | Your plan or account entitlements do not permit the requested operation. Check your plan and feature access. |
 | **404** | RESOURCE_NOT_FOUND | The requested resource does not exist. Verify the endpoint, resource ID, and parameters. |
-| **409** | - | The request conflicts with the current state of the resource, such as attempting to create a duplicate. Review the request and resource state. |
+| **409** | CONFLICT | The request conflicts with the current state of the resource, such as attempting to create a duplicate. Review the request and resource state. |
 | **422** | UNPROCESSABLE_CONTENT | The request is understood, but the content cannot be processed or fails validation. Review the provided data for errors. |
 | **424** | FAILED_DEPENDENCY | A required dependency failed while processing the request. Try again later or contact support if the issue persists. |
 | **429** | TOO_MANY_REQUESTS | You have exceeded the allowed request rate. Wait before retrying or reduce your request frequency. |

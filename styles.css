@@ -429,47 +429,7 @@
   z-index: 1;
 }
 
-.wav-wave {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 90px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  padding: 0 18px;
-  opacity: 0.16;
-  pointer-events: none;
-  z-index: 0;
-  -webkit-mask-image: linear-gradient(to top, #000 20%, transparent);
-  mask-image: linear-gradient(to top, #000 20%, transparent);
-}
 
-.wav-wave span {
-  flex: 0 0 5px;
-  max-width: 5px;
-  height: 30%;
-  border-radius: 3px 3px 0 0;
-  background: linear-gradient(to top, var(--wav-green), #14b8a6);
-  transform-origin: bottom;
-  animation: wav-eq 1.6s ease-in-out infinite;
-}
-
-.wav-wave span:nth-child(2n) { height: 55%; animation-delay: -0.3s; }
-.wav-wave span:nth-child(3n) { height: 80%; animation-delay: -0.7s; }
-.wav-wave span:nth-child(5n) { height: 45%; animation-delay: -1.1s; }
-.wav-wave span:nth-child(7n) { height: 100%; animation-delay: -0.5s; }
-
-@keyframes wav-eq {
-  0%, 100% { transform: scaleY(0.35); }
-  50% { transform: scaleY(1); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .wav-wave span,
-  .wav-live-dot { animation: none; }
-}
 
 .wav-hero-badges {
   display: flex;

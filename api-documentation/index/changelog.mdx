@@ -1,26 +1,7 @@
-<Update label="October 2026" description="Sound Generator Pro" tags={["New model", "Free in October", "Pricing", "Limits", "Errors"]}>
-  ### Sound Generator Pro is live
-  Our fastest, highest-quality sound model now powers every [Sound Generator](/api-documentation/conversions/soundgenerator) request, with no new parameters needed.
-  - Generate **sound FX**, **loops at any BPM**, **instrument samples**, and **Foley** from one prompt.
-  - Set `audio_length` from **5 seconds to 2 minutes**. Prompts can be up to **300 characters**.
-
-  ### Free for the whole month of October
-  Sound Generator is **free throughout October**, up to **500 generations/day** and **20 generations/hour**.
-
-  ### New Sound Generator pricing
-  After October, Sound Generator costs **more than 3x less**: from **\$0.011/generation** on the Pro plan (was \$0.037). See the [Pricing Page](/api-documentation/index/pricing).
-
-  ### Input audio length limits
-  - **4 minutes**: `v1/Remix`, Extend, Inpaint, and Sing Over Instrumental
-  - **6 minutes**: `v2/Remix`
-  - **8 minutes**: all other features
-
-  See [Audio Length Limits](/api-documentation/utilities/ratelimits#audio-length-limits).
-
-  ### Error codes and webhooks
-  - Error responses now include an `error_code` (for example `INSUFFICIENT_CREDITS`). See [Handling Errors](/api-documentation/utilities/error).
-  - Every conversion webhook now includes a `title` field.
-  - Output files are served from our CDN. `audio_url` is valid for 1 day.
+<Update label="October 2026" description="Sound Generator Pro">
+  **Sound Generator** will be **free for the month of October**, with up to **500 generations/day, 21/hour**. It costs **more than 3x less**: from **\$0.011/generation** on the Pro plan (was \$0.037). See the [Pricing Page](/api-documentation/index/pricing). <br />
+  **Remix, Extend, Inpaint, and Sing Over Instrumental** support audio lengths of up to **4 minutes**, while **all other features** support audio lengths of up to **8 minutes**. <br />
+  Every conversion webhook now includes a `title` field. 
 </Update>
 
 <Update label="August 2026" description="Pricing, Rate Limits">
