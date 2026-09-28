@@ -25,6 +25,8 @@ This endpoint removes reverberation (echo) from an uploaded or linked audio file
 | `audio_file`     | `File` | Optional | Upload the audio file directly. Either `audio_url` or `audio_file` must be provided. |
 | `webhook_url`    | `String`     | Optional | Callback URL for async response.                                           |
 
+> **Max input audio length:** 8 minutes. See [Audio Length Limits](/api-documentation/utilities/ratelimits#audio-length-limits).
+
 >**Note:** Either audio_file or audio_url must be provided.
 
 >**content-type:** multipart/form-data
@@ -34,9 +36,9 @@ This endpoint removes reverberation (echo) from an uploaded or linked audio file
 ## Sample Output
 
 Listen to a real sample output:
-<audio controls="1" controlslist="nodownload nofullscreen noremoteplayback" src="https://cdn1.wav.com/conversions/e99d00bb-2ddf-4279-a15e-6e22801ee575_reverb.mp3">Your browser does not support the audio playback.</audio>
+<audio controls="1" controlslist="nodownload nofullscreen noremoteplayback" src="https://cdn1.musicgpt.com/conversions/8df9c0f4-b673-495f-a9a0-715c366c0b55_reverb.mp3">Your browser does not support the audio playback.</audio>
 
-<a href="https://cdn1.wav.com/conversions/e99d00bb-2ddf-4279-a15e-6e22801ee575_reverb.wav" target="_blank">Download Audio</a>
+<a href="https://cdn1.musicgpt.com/conversions/8df9c0f4-b673-495f-a9a0-715c366c0b55_reverb.mp3" target="_blank">Download Audio</a>
 
 ---
 
@@ -114,10 +116,11 @@ print(response.json())
   "task_id": "e99d00bb-2ddf-4279-a15e-6e22801ee575", 
   "conversion_id": "fbcf0c40-a33d-40aa-8c1d-7bb6f9df0b0f", 
   "audio_path": "files/4efbdeff-48a2-401c-a9e6-8a2ffe465487.wav", 
-  "noreverb": "https://cdn1.wav.com/conversions/e99d00bb-2ddf-4279-a15e-6e22801ee575_reverb.mp3", 
-  "reverb": "https://cdn1.wav.com/conversions/e99d00bb-2ddf-4279-a15e-6e22801ee575_noreverb.mp3", 
+  "noreverb": "https://cdn1.musicgpt.com/conversions/8df9c0f4-b673-495f-a9a0-715c366c0b55_reverb.mp3", 
+  "reverb": "https://cdn1.musicgpt.com/conversions/8df9c0f4-b673-495f-a9a0-715c366c0b55_noreverb.mp3", 
   "reverb_wav": "", 
   "message": "de_reverb conversion Completed", 
+  "title": "Dereverb",
   "conversion_duration": 136.83045351473922, 
   "conversion_cost": "0.48"
 }
@@ -126,8 +129,11 @@ print(response.json())
 
 ## Common Errors
 
-- **422 Unprocessable Entity**: Both `audio_url` and `audio_file` cannot be `None`.
-- **500 Internal Server Error**: A server error occurred during processing.
+- **402 Payment Required** (`INSUFFICIENT_CREDITS`): (`INSUFFICIENT_CREDITS`): Your credit balance is insufficient.
+- **422 Unprocessable Entity** (`UNPROCESSABLE_CONTENT`): (`UNPROCESSABLE_CONTENT`): Both `audio_url` and `audio_file` cannot be `None`.
+- **500 Internal Server Error** (`INTERNAL_SERVER_ERROR`): (`INTERNAL_SERVER_ERROR`): A server error occurred during processing. See [Handling Errors](/api-documentation/utilities/error) for the error response format and all error codes.
+
+See [Handling Errors](/api-documentation/utilities/error) for the error response format and all error codes.
 
 ---
 

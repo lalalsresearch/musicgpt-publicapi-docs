@@ -26,9 +26,9 @@ Use this endpoint to trim a section from an existing audio file.
 ## Sample Output
 
 Listen to the trimmed audio:
-<audio controls="1" controlslist="nodownload nofullscreen noremoteplayback" src="https://cdn1.wav.com/FileConversions/8993b364-9141-4de7-ab38-5a4178618f0e.mp3">Your browser does not support audio playback.</audio>
+<audio controls="1" controlslist="nodownload nofullscreen noremoteplayback" src="https://cdn1.musicgpt.com/conversions/6bfe2a8b-3076-490b-aec6-d1e5e6e59e83/6bfe2a8b-3076-490b-aec6-d1e5e6e59e83.mp3">Your browser does not support audio playback.</audio>
 
-<a href="https://cdn1.wav.com/FileConversions/8993b364-9141-4de7-ab38-5a4178618f0e.wav" target="_blank">Download Audio</a>
+<a href="https://cdn1.musicgpt.com/conversions/6bfe2a8b-3076-490b-aec6-d1e5e6e59e83/6bfe2a8b-3076-490b-aec6-d1e5e6e59e83.mp3" target="_blank">Download Audio</a>
 
 ---
 
@@ -47,6 +47,8 @@ Visit the [Audio Cutter Endpoint Explorer](/api-documentation/endpoint/audio_cut
 | `start_time`         | Float   | Yes      | The start time (in milliseconds) of the audio to trim              |
 | `end_time`           | Float   | Yes      | The end time (in milliseconds) of the audio to trim                |
 | `output_extension`   | String  | Yes      | Output format: mp3, wav, flac, ogg, aac, or webm              |
+
+> **Max input audio length:** 8 minutes. See [Audio Length Limits](/api-documentation/utilities/ratelimits#audio-length-limits).
 
 >**Note:** Either audio_file or audio_url must be provided.
 
@@ -109,8 +111,9 @@ When audio cutter conversion completes, your webhook will receive:
   "conversion_type": "Audio Cutter", 
   "task_id": "8993b364-9141-4de7-ab38-5a4178618f0e", 
   "conversion_id": "3f07f1ba-9eb5-4581-95ed-427eac1dda0c", 
-  "output_file": "https://cdn1.wav.com/FileConversions/8993b364-9141-4de7-ab38-5a4178618f0e.mp3", 
-  "message": "Audio cutter completed"
+  "output_file": "https://cdn1.musicgpt.com/conversions/6bfe2a8b-3076-490b-aec6-d1e5e6e59e83/6bfe2a8b-3076-490b-aec6-d1e5e6e59e83.mp3", 
+  "message": "Audio cutter completed",
+   "title": "Audio Cutter"
 } 
 ```
 

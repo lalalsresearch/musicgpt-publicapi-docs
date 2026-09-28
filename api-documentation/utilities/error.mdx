@@ -10,24 +10,41 @@ Below is a list of common error codes returned by the API, along with their desc
 
 ## ❌ Common Error Codes
 
-| **Code** | **Description**                                      | **What to Do**                                                                                                                                                 |
-|----------|------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **400**  | Bad Request                                          | The request is malformed or contains invalid parameters. Check that all required parameters are included and correctly formatted.                              |
-| **402**  | Payment Required                                     | Your account has insufficient funds to process the request. Add funds or check your payment method to resolve this issue.                                      |
-| **403**  | Forbidden                                            | You do not have permission to access the requested resource. Ensure your API key has the correct permissions or check for potential authentication issues.     |
-| **404**  | Not Found                                            | The resource you are trying to access does not exist. Verify the endpoint and parameters for correctness, and ensure the resource is available.                 |
-| **409**  | Conflict                                             | There is a conflict with the current state of the resource, possibly due to an attempt to create a duplicate. Review the request and the state of the resource.  |
-| **422**  | Unprocessable Entity                                 | The server understands the request but is unable to process it, usually due to validation errors in the request body. Review the provided data for errors.       |
-| **429**  | Rate Limit Exceeded                                  | You have exceeded the allowed number of requests within a given time period. Wait for the rate limit to reset or adjust your request frequency.                |
-| **500**  | Internal Server Error                                | An unexpected server error occurred. This is typically a temporary issue. Try again later or contact support if the problem persists.                           |
+| **Code** | **ERROR_CODE** | **Description** |
+|----------|-----------------|----------------|
+| **400** | - | The request is malformed or contains invalid parameters. Check that all required parameters are included and correctly formatted. |
+| **401** | UNAUTHORIZED_ACCESS | The request does not include valid authorization. Check that your API key or credentials are correct and properly configured. |
+| **402** | INSUFFICIENT_CREDITS | Your account has insufficient credits to process the request. Add credits or check your account balance. |
+| **403** | FORBIDDEN | Your plan or account entitlements do not permit the requested operation. Check your plan and feature access. |
+| **404** | RESOURCE_NOT_FOUND | The requested resource does not exist. Verify the endpoint, resource ID, and parameters. |
+| **409** | - | The request conflicts with the current state of the resource, such as attempting to create a duplicate. Review the request and resource state. |
+| **422** | UNPROCESSABLE_CONTENT | The request is understood, but the content cannot be processed or fails validation. Review the provided data for errors. |
+| **424** | FAILED_DEPENDENCY | A required dependency failed while processing the request. Try again later or contact support if the issue persists. |
+| **429** | TOO_MANY_REQUESTS | You have exceeded the allowed request rate. Wait before retrying or reduce your request frequency. |
+| **500** | INTERNAL_SERVER_ERROR | An unexpected internal server error occurred. Try again later or contact support if the problem persists. |
+| **503** | SERVICE_UNAVAILABLE | The service is temporarily unavailable. Try again later. |
+
+---
+
+## Error Response Format
+
+Error responses share the same JSON body. Use `error_code` to branch on the error type in your code, and `message` for details.
+
+```json
+{
+  "success": false,
+  "error_code": "INSUFFICIENT_CREDITS",
+  "message": "Insufficient credits to process this request."
+}
+```
 
 ---
 
 ## Error Handling Tips
 
-- **Check the Response Body**: In most cases, the response body will contain additional information regarding the error, such as error messages or codes that can help you pinpoint the issue.
+- **Check the Response Body**: The `error_code` and `message` fields tell you what went wrong and help you pinpoint the issue.
 - **Rate Limits**: If you encounter a **429** error, avoid sending requests too frequently. Implement exponential backoff to retry requests after waiting for the rate limit to reset.
-- **Authentication**: A **403 Forbidden** error may be due to incorrect API key or insufficient permissions. Ensure that your key is valid and has the right scopes to access the resource.
+- **Authentication**: A **401** error means your API key is missing or invalid. A **403** error means your plan does not include the requested feature. Check your key and plan.
 - **Testing**: Always test your API calls in a controlled environment to ensure that the request format and parameters are correct.
 
 > 📌 **Tip:** Always handle errors gracefully in your application. Proper error handling ensures that users have a better experience, even when things go wrong!
@@ -43,20 +60,41 @@ It's good practice to incorporate error-handling logic in your API requests. Her
 ```python
 import requests
 
-url = "https://api.wav.com/data"
-headers = {
-    "Authorization": "Bearer <your_api_key>"
+url = "https://api.wav.com/api/public/v2/MusicAI"
+
+payload = {
+    "prompt": "<string>",
+    "lyrics": "<string>",
+    "model": "v7",
+    "webhook_url": "https://example.com/my-webhook"
 }
 
-response = requests.get(url, headers=headers)
+headers = {
+    "Authorization": "<api-key>",
+    "Content-Type": "application/json"
+}
+
+response = requests.post(
+    url,
+    json=payload,
+    headers=headers)
 
 if response.status_code == 200:
     print("Request successful:", response.json())
-elif response.status_code == 400:
-    print("Bad Request: Check your input parameters.")
-elif response.status_code == 429:
-    print("Rate Limit Exceeded: Please try again later.")
-elif response.status_code == 500:
-    print("Internal Server Error: Try again later.")
 else:
-    print(f"Error {response.status_code}: {response.text}")
+    try:
+        error = response.json()
+        error_code = error.get("error_code")
+        message = error.get("message")
+    except ValueError:
+        error_code, message = None, response.text
+
+    if error_code == "INSUFFICIENT_CREDITS":
+        print("Add credits to your account:", message)
+    elif error_code == "UNPROCESSABLE_CONTENT":
+        print("Check your request parameters:", message)
+    elif error_code == "TOO_MANY_REQUESTS":
+        print("Rate limit exceeded, retry later:", message)
+    else:
+        print(f"{response.status_code} {error_code}:", message)
+```

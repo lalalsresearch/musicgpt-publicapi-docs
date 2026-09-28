@@ -26,7 +26,9 @@ Use this endpoint to master an audio file based on a reference track.
 
 Listen to the mastered audio:
 
-<audio controls="1" controlslist="nodownload nofullscreen noremoteplayback" src="https://cdn1.wav.com/conversions/sample-mastered.mp3">Your browser does not support audio playback.</audio>
+<audio controls="1" controlslist="nodownload nofullscreen noremoteplayback" src="https://cdn1.musicgpt.com/conversions/de7425cd-8100-454e-b6fa-4673769e4507/de7425cd-8100-454e-b6fa-4673769e4507.mp3">Your browser does not support audio playback.</audio>
+
+<a href="https://cdn1.musicgpt.com/conversions/de7425cd-8100-454e-b6fa-4673769e4507/de7425cd-8100-454e-b6fa-4673769e4507.mp3" target="_blank">Download Audio</a>
 
 ---
 
@@ -48,6 +50,8 @@ Visit the [Audio Mastering Endpoint Explorer](/api-documentation/endpoint/audio_
 | `reference_audio_url` | String  | Optional      | URL path of the reference audio file to match.                            |
 | `output_extension`     | String  | Optional | Desired output format (`mp3`, `wav`, `flac`, `ogg`, `aac`, `webm`)          |
 | `webhook_url`          | String  | Optional | URL to receive callback notification when processing completes             |
+
+> **Max input audio length:** 8 minutes. See [Audio Length Limits](/api-documentation/utilities/ratelimits#audio-length-limits).
 
 >**Note:** Either audio_file or audio_url must be provided.
 
@@ -114,8 +118,9 @@ print(response.json())
   "conversion_type": "Audio Mastering",
   "task_id": "0d12ef34-5678-4abc-9123-456def7890ab",
   "conversion_id": "de7b2225-9a75-4315-b761-6dcc4357a8de",
-  "output_file": "https://cdn1.wav.com/conversions/sample-mastered.mp3",
-  "message": "Audio Mastering Completed"
+  "output_file": "https://cdn1.musicgpt.com/conversions/de7425cd-8100-454e-b6fa-4673769e4507/de7425cd-8100-454e-b6fa-4673769e4507.mp3",
+  "message": "Audio Mastering Completed",
+   "title": "Audio Mastering"
 
 }
 ```

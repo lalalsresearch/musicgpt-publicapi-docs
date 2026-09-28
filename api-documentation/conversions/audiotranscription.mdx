@@ -48,6 +48,8 @@ Visit the [Audio Transcribe Endpoint Explorer](/api-documentation/endpoint/audio
 | `language`       | String  | Optional | Language code (e.g., `en`, `es`, `fr`) for targeted accuracy |
 | `webhook_url`    | String  | Optional | Webhook URL to receive the transcription asynchronously     |
 
+> **Max input audio length:** 8 minutes. See [Audio Length Limits](/api-documentation/utilities/ratelimits#audio-length-limits).
+
 > **content-type:** multipart/form-data
 ---
 
@@ -111,9 +113,37 @@ When transcription completes, your webhook will receive:
     "transcription": "It's been a long day without you, my friend, and I'll tell you all about it when I see you again. We've come a long way from where we began. Oh, I'll tell you all about it when I see you again, when I see you again. Damn, you know, all the planes we flew, good things we've been through. And I'll be standing right here talking to you about another pap. I know we love to hit the road and laugh, but something told me that it wouldn't last.", 
     "translation": null, 
     "detected_language": "en", 
-    "word_timestamps": [...]
+    "title": "Audio Transcription",
+    "word_timestamps": [
+        {
+            "index": 0,
+            "text": "It's",
+            "start": 0,
+            "end": 420
+        },
+        {
+            "index": 1,
+            "text": "been",
+            "start": 420,
+            "end": 550
+        },
+        {
+            "index": 2,
+            "text": "a",
+            "start": 550,
+            "end": 680
+        },
+        {
+            "index": 3,
+            "text": "long",
+            "start": 680,
+            "end": 1010
+        }
+    ]
 }
 ```
+
+> `word_timestamps` is returned only when `word_timestamps` is `true` in the request. `start` and `end` are in milliseconds. The array above is truncated; the full response has one entry per word.
 
 ---
 

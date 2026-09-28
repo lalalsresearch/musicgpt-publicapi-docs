@@ -26,7 +26,7 @@ Use this endpoint to adjust the speed of an audio file.
 ## Sample Output
 
 Listen to the speed-changed audio:
-<audio controls="1" controlslist="nodownload nofullscreen noremoteplayback" src="https://cdn1.wav.com/FileConversions/b0ac9d46-64d7-4843-af48-a0b6effe3666.wav">Your browser does not support audio playback.</audio>
+<audio controls="1" controlslist="nodownload nofullscreen noremoteplayback" src="https://cdn1.musicgpt.com/conversions/e477a121-ba71-4753-96ae-874779f0623a/e477a121-ba71-4753-96ae-874779f0623a.mp3">Your browser does not support audio playback.</audio>
 
 ---
 
@@ -47,6 +47,8 @@ Visit the [Audio Speed Changer Endpoint Explorer](/api-documentation/endpoint/au
 | `speed_change_factor`  | Number  | Yes      | Factor to change speed (e.g., 2.0 = double speed, 0.5 = half speed) (min: 0.25, max: 4.0) |
 | `output_extension`     | String  | Yes      | Desired output format (`mp3`, `wav`, `flac`, `ogg`, `aac`, `webm`)          |
 | `webhook_url`          | String  | Optional | URL to receive callback notification when processing completes             |
+
+> **Max input audio length:** 8 minutes. See [Audio Length Limits](/api-documentation/utilities/ratelimits#audio-length-limits).
 
 >**Note:** Either audio_file or audio_url must be provided.
 
@@ -108,8 +110,9 @@ When transcription completes, your webhook will receive:
   "conversion_type": "Audio Speed Changer", 
   "task_id": "b0ac9d46-64d7-4843-af48-a0b6effe3666", 
   "conversion_id": "fe19945b-d466-4183-b559-5d264bddd492", 
-  "output_file": "https://cdn1.wav.com/FileConversions/b0ac9d46-64d7-4843-af48-a0b6effe3666.mp3", 
-  "message": "Audio speed changer completed"
+  "output_file": "https://cdn1.musicgpt.com/conversions/e477a121-ba71-4753-96ae-874779f0623a/e477a121-ba71-4753-96ae-874779f0623a.mp3", 
+  "message": "Audio speed changer completed",
+  "title": "Audio Speed Changer"
 }
 ```
 

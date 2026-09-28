@@ -19,7 +19,7 @@
 - The `wav-` CSS class prefix in `styles.css` is a code identifier — leave it lowercase.
 - Hosts, all on `wav.com` — keep them consistent and do not invent new ones:
   - `api.wav.com` — API request host, used in every curl and SDK sample
-  - `cdn1.wav.com` — delivery host for all generated output and sample audio
+  - `cdn1.musicgpt.com` — delivery host for all generated output and sample audio (there is no `cdn1.wav.com`)
   - `docs.wav.com` — this site; prefer root-relative links (`/api-documentation/...`) internally
 - `mybucket.s3.amazonaws.com` and similar in request examples are placeholders for the
   *caller's* own storage. Leave them generic — they are not our infrastructure.
