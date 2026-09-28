@@ -21,10 +21,10 @@ This is the primary endpoint for initiating cover song conversion tasks.
 ## Sample Output
 
 Listen to a real sample output:
-<audio controls="1" controlslist="nodownload nofullscreen noremoteplayback" src="https://cdn1.wav.com/projects/acff300f-1c96-498d-99fe-929b985c5c55.mp3">Your browser does not support the audio playback.</audio>
+<audio controls="1" controlslist="nodownload nofullscreen noremoteplayback" src="https://cdn1.musicgpt.com/conversions/api/standard/d5c20c18-d505-5a1d-8c5f-5592c5941b97/d5c20c18-d505-5a1d-8c5f-5592c5941b97.mp3">Your browser does not support the audio playback.</audio>
 
 Output File:
-<a href="https://cdn1.wav.com/projects/acff300f-1c96-498d-99fe-929b985c5c55.wav" target="_blank">Download Audio</a>
+<a href="https://cdn1.musicgpt.com/conversions/api/standard/d5c20c18-d505-5a1d-8c5f-5592c5941b97/d5c20c18-d505-5a1d-8c5f-5592c5941b97.mp3" target="_blank">Download Audio</a>
 
 ---
 
@@ -44,6 +44,8 @@ Visit the [Cover Endpoint Explorer](/api-documentation/endpoint/cover) to test i
 | `pitch`       | `Integer`    | Optional | Adjust pitch between -12 and 12 semitones. Default is `0`.                             |
 | `webhook_url` | `String`     | Optional | Callback URL for async response.                                                       |
 
+> **Max input audio length:** 8 minutes. See [Audio Length Limits](/api-documentation/utilities/ratelimits#audio-length-limits).
+
 > **content-type:** multipart/form-data
 
 
@@ -57,8 +59,8 @@ Visit the [Cover Endpoint Explorer](/api-documentation/endpoint/cover) to test i
 curl -X POST "https://api.wav.com/api/public/v1/Cover" \
 -H "accept: multipart/form-data" \
 -H "Authorization: <api_key>" \
--F "audio_url=https://www.youtube.com/watch?v=jGflUbPQfW8" \
--F "voice_id=Drake" \
+-F "audio_url=<YOUR_AUDIO_URL>" \
+-F "voice_id=e0bb585f-b798-4bac-ac4e-de7fff38f9d7" \
 -F "pitch=0" \
 -F "webhook_url=https://example.com/webhook"
 ```
@@ -123,9 +125,10 @@ When the cover conversion completes, the webhook receives:
   "conversion_type": "Cover",
   "task_id": "0ec93bdd-6132-40db-a873-676dc314919c",
   "conversion_id": "acff300f-1c96-498d-99fe-929b985c5c55",
-  "conversion_path": "https://cdn1.wav.com/projects/acff300f-1c96-498d-99fe-929b985c5c55.mp3",
+  "title": "Cover",
+  "conversion_path": "https://cdn1.musicgpt.com/conversions/api/standard/d5c20c18-d505-5a1d-8c5f-5592c5941b97/d5c20c18-d505-5a1d-8c5f-5592c5941b97.mp3",
   "conversion_duration": 272.44,
-  "message": "Conversion Completed",
+  "message": "Conversion Completed"
 }
 ```
 
@@ -133,10 +136,11 @@ When the cover conversion completes, the webhook receives:
 
 ## Common Errors
 
-* **400 Bad Request**: The file could not be downloaded from the provided URL.
-* **402 Payment Required**: Your credit balance is insufficient.
-* **422 Unprocessable Entity**: No `audio_url` or `audio_file` provided.
-* **500 Internal Server Error**: Something went wrong on our end.
+* **402 Payment Required** (`INSUFFICIENT_CREDITS`): (`INSUFFICIENT_CREDITS`): Your credit balance is insufficient.
+* **422 Unprocessable Entity** (`UNPROCESSABLE_CONTENT`): (`UNPROCESSABLE_CONTENT`): The file could not be downloaded from the provided URL. No `audio_url` or `audio_file` provided.
+* **500 Internal Server Error** (`INTERNAL_SERVER_ERROR`): (`INTERNAL_SERVER_ERROR`): Something went wrong on our end.
+
+See [Handling Errors](/api-documentation/utilities/error) for the error response format and all error codes.
 
 ---
 

@@ -3,6 +3,26 @@ title: Sound Generator
 openapi: 'POST /v1/sound_generator'
 ---
 
+<div className="wav-pro-card">
+  <div className="wav-wave" aria-hidden="true"><span /><span /><span /><span /><span /><span /><span /><span /><span /><span /><span /><span /><span /><span /><span /><span /><span /><span /><span /><span /><span /><span /><span /><span /><span /><span /><span /><span /><span /><span /><span /><span /><span /><span /><span /><span /><span /><span /><span /><span /></div>
+  <div className="wav-hero-badges wav-badges-left">
+    <span className="wav-pro-badge">Pro model</span>
+    <span className="wav-free-chip"><Icon icon="gift" iconType="solid" /> Free all October</span>
+  </div>
+  <p className="wav-pro-card-title">Sound Generator <span className="wav-gradient-text">Pro</span></p>
+  <p className="wav-pro-card-text">Our fastest, highest-quality sound model yet, now powering every request to <code>/v1/sound_generator</code>. Free throughout October for up to 500 generations/day and 21/hour; after October, pricing is more than 3x lower than before.</p>
+  <div className="wav-stats">
+      <div className="wav-stat"><span className="wav-stat-value">$0</span><span className="wav-stat-label">all of October</span></div>
+      <div className="wav-stat"><span className="wav-stat-value">500</span><span className="wav-stat-label">generations / day</span></div>
+      <div className="wav-stat"><span className="wav-stat-value">21</span><span className="wav-stat-label">generations / hour</span></div>
+      <div className="wav-stat"><span className="wav-stat-value">3x</span><span className="wav-stat-label">cheaper after October</span></div>
+    </div>
+  <div className="wav-pro-card-actions">
+    <a href="/api-documentation/index/pricing" className="wav-btn wav-btn-primary">See the new pricing →</a>
+    <a href="/api-documentation/endpoint/soundgenerator" className="wav-btn wav-btn-ghost">Open the playground</a>
+  </div>
+</div>
+
 Create custom sounds with AI using just a simple prompt.
 
 **Sound Generator** lets you synthesize high-quality sound effects and audio textures directly from text prompts. Perfect for developers, game designers, filmmakers, and creative technologists who need original sounds on demand.
@@ -12,6 +32,32 @@ Create custom sounds with AI using just a simple prompt.
 - Instant feedback or asynchronous delivery via webhook
 
 Sound Generator is designed for flexibility, speed, and professional-grade quality.
+
+---
+
+## What it supports
+
+| Feature | What it creates | Example prompt |
+|---|---|---|
+| **Sound FX** | A one-shot sound, action, ambience, or short audio scene. | Generate sound FX of a realistic car crash with tire skid, metal impact, and brief glass shatter; no music; 6 seconds. |
+| **Loops** | Repeatable audio designed to cycle seamlessly at a stated tempo. | Generate loop of tight kick and snare at 80 BPM in 4/4, four bars, with a clean loop point and no vocals. |
+| **Samples** | A single musical note, chord, hit, texture, or short isolated phrase. | Generate sample of a clean E major chord on acoustic guitar, one sustained hit with natural decay and no other instruments. |
+
+---
+
+## Special features
+
+<CardGroup cols={3}>
+  <Card title="BPM control" icon="drum">
+    Specify an exact tempo in your prompt (e.g. "at 90 BPM") and the output locks to it, so loops sync cleanly with an existing track.
+  </Card>
+  <Card title="Foley support" icon="shoe-prints">
+    Everyday, real-world sounds like footsteps, cloth rustle, or object handling, ready to layer into film, video, and game audio.
+  </Card>
+  <Card title="Audio length control" icon="clock">
+    Set the exact duration, from **5 seconds to 2 minutes**, with the `audio_length` parameter.
+  </Card>
+</CardGroup>
 
 ---
 
@@ -29,10 +75,10 @@ Use this endpoint to generate sounds based on a text description.
 
 Listen to an actual sample:
 
-Prompt: sound of waves crashing at the sea shore.
-<audio controls="1" controlslist="nodownload nofullscreen noremoteplayback" src="https://cdn1.wav.com/conversions/0af8567f-6156-4bb2-9adc-99b0c8792700_sound.mp3">Your browser does not support the audio playback.</audio>
+Prompt: sound of bird chirping in a forest.
+<audio controls="1" controlslist="nodownload nofullscreen noremoteplayback" src="https://cdn1.musicgpt.com/conversions/api/standard/26c9aaf8-f292-4c66-992b-7f3c7dfe85fe.mp3">Your browser does not support the audio playback.</audio>
 
-<a href="https://cdn1.wav.com/conversions/0af8567f-6156-4bb2-9adc-99b0c8792700_sound.wav" target="_blank">Download Audio</a>
+<a href="https://cdn1.musicgpt.com/conversions/api/standard/26c9aaf8-f292-4c66-992b-7f3c7dfe85fe.mp3" target="_blank">Download Audio</a>
 
 ---
 
@@ -48,9 +94,9 @@ Visit the [Sound Generator Endpoint Explorer](/api-documentation/endpoint/soundg
 
 | Parameter        | Type    | Required | Description                                             |
 |------------------|---------|----------|---------------------------------------------------------|
-| `prompt`         | String  | Yes      | A natural language description of the sound you want    |
+| `prompt`         | String  | Yes      | A natural language description of the sound you want. Maximum 300 characters. |
 | `webhook_url`    | String  | Optional | Webhook URL to receive a callback with the audio result |
-| `audio_length`        | int  | Optional | Specify song length             |
+| `audio_length`   | Integer | Optional | Duration of the generated audio in seconds, from `5` to `120` |
 | `generate_album_cover` | Boolean | Optional  | If `true`, generate an album cover for the generated audio |
 
 > **content-type:** application/x-www-form-urlencoded 
@@ -89,10 +135,10 @@ print(response.text)
 ```json
 {
   "success":true,
-  "task_id":"0af8567f-6156-4bb2-9adc-99b0c8792700",
-  "conversion_id":"9e6ac90d-c09e-4ea6-8c39-d9f4e39bbbc8",
+  "task_id":"26c9aaf8-f292-4c66-992b-7f3c7dfe85fe",
+  "conversion_id":"31b6c4a2-e5e2-44ab-baf1-93ffa4c8a7b7",
   "eta":84,
-  "credit_estimate":0.99,
+  "credit_estimate":0.011,
   "message":"",
   "status":"IN_QUEUE"
 }
@@ -104,16 +150,44 @@ print(response.text)
 
 Once the sound is ready, your webhook will receive:
 
+* 1 Sound Generator webhook
+* 1 Album Cover webhook — sent only when `generate_album_cover` is `true`
+
+Sound Generator Webhook
 ```json
 {
-  "success": true, 
-  "conversion_type": "Sound Creator", 
-  "task_id": "0af8567f-6156-4bb2-9adc-99b0c8792700", 
-  "conversion_id": "9e6ac90d-c09e-4ea6-8c39-d9f4e39bbbc8", 
-  "conversion_duration": 2.089795918367347, 
-  "message": "Audio Generation Completed Successfully", 
-  "conversion_paths": {"9e6ac90d-c09e-4ea6-8c39-d9f4e39bbbc8": "https://cdn1.wav.com/conversions/0af8567f-6156-4bb2-9adc-99b0c8792700_sound.mp3"}, 
-  "conversion_durations": {"9e6ac90d-c09e-4ea6-8c39-d9f4e39bbbc8": 2.089795918367347}
+    "success": true,
+    "conversion_type": "Sound Creator",
+    "task_id": "26c9aaf8-f292-4c66-992b-7f3c7dfe85fe",
+    "conversion_id": "31b6c4a2-e5e2-44ab-baf1-93ffa4c8a7b7",
+    "conversion_path": "https://cdn1.musicgpt.com/conversions/api/standard/26c9aaf8-f292-4c66-992b-7f3c7dfe85fe.mp3",
+    "conversion_path_wav": null,
+    "conversion_duration": 30.0,
+    "message": "Audio Generation Completed Successfully",
+    "title": "Sound Creator",
+    "conversion_paths": {"31b6c4a2-e5e2-44ab-baf1-93ffa4c8a7b7": "https://cdn1.musicgpt.com/conversions/api/standard/26c9aaf8-f292-4c66-992b-7f3c7dfe85fe.mp3"},
+    "conversion_paths_wav": {"31b6c4a2-e5e2-44ab-baf1-93ffa4c8a7b7": null},
+    "conversion_durations": { "31b6c4a2-e5e2-44ab-baf1-93ffa4c8a7b7": 30.0}
+}
+```
+
+Album Cover Webhook
+```json
+{
+    "success": true,
+    "conversion_type": "Sound Creator",
+    "task_id": "26c9aaf8-f292-4c66-992b-7f3c7dfe85fe",
+    "image_paths": [
+        "https://cdn1.musicgpt.com/img-gen-pipeline/api/26c9aaf8-f292-4c66-992b-7f3c7dfe85fe.jpg"
+    ],
+    "thumbnail_paths": [
+        "https://cdn1.musicgpt.com/img-gen-pipeline/api/26c9aaf8-f292-4c66-992b-7f3c7dfe85fe_thumb.jpg"
+    ],
+    "image_path": "https://cdn1.musicgpt.com/img-gen-pipeline/api/26c9aaf8-f292-4c66-992b-7f3c7dfe85fe.jpg",
+    "thumbnail_path": "https://cdn1.musicgpt.com/img-gen-pipeline/api/26c9aaf8-f292-4c66-992b-7f3c7dfe85fe_thumb.jpg",
+    "conversion_id_1": "31b6c4a2-e5e2-44ab-baf1-93ffa4c8a7b7",
+    "album_cover_generator_output": true,
+    "subtype": "album_cover_generation"
 }
 ```
 

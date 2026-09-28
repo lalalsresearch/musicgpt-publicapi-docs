@@ -28,15 +28,17 @@ This endpoint processes an uploaded or linked audio file and converts it to a sp
 | `target_bit_depth`  | `Integer`    | Optional | Target bit depth. Options: `16`, `24`, `32`. Defaults to `16`.              |
 | `webhook_url`       | `String`     | Optional | Callback URL to receive the result once conversion is complete.             |
 
+> **Max input audio length:** 8 minutes. See [Audio Length Limits](/api-documentation/utilities/ratelimits#audio-length-limits).
+
 > **content-type:** multipart/form-data
 
 ---
 ## Sample Output
 
 Listen to a real sample output:
-<audio controls="1" controlslist="nodownload nofullscreen noremoteplayback" src="https://cdn1.wav.com/FileConversions/059ab1ef-c92d-4be4-b2f3-4fe57d26ae87.mp3">Your browser does not support the audio playback.</audio>
+<audio controls="1" controlslist="nodownload nofullscreen noremoteplayback" src="https://cdn1.musicgpt.com/FileConversions/standard/3567f876-a196-467f-8538-f12ef1ba318e.mp3">Your browser does not support the audio playback.</audio>
 
-<a href="https://cdn1.wav.com/FileConversions/059ab1ef-c92d-4be4-b2f3-4fe57d26ae87.wav" target="_blank">Download Audio</a>
+<a href="https://cdn1.musicgpt.com/FileConversions/standard/3567f876-a196-467f-8538-f12ef1ba318e.mp3" target="_blank">Download Audio</a>
 
 ---
 
@@ -114,9 +116,10 @@ print(response.json())
 {
   "success": true, 
   "conversion_id": "a1286a84-d886-47d9-a717-77af15894cb9", 
-  "output_file_path": "https://cdn1.wav.com/FileConversions/standard/3567f876-a196-467f-8538-f12ef1ba318e.mp3", 
+  "output_file_path": "https://cdn1.musicgpt.com/FileConversions/standard/3567f876-a196-467f-8538-f12ef1ba318e.mp3", 
   "conversion_type": "File Conversion", 
   "task_id": "7024eac0-02e2-4811-96e3-7031f007f97f",
+  "title": "File Conversion",
   "message": "File conversion completed"
 }
 ```
@@ -124,8 +127,11 @@ print(response.json())
 
 ## Common Errors
 
-- **400 Bad Request**: Invalid request. Possibly due to missing parameters or unsupported formats.
-- **500 Internal Server Error**: Server encountered an error during processing.
+- **402 Payment Required** (`INSUFFICIENT_CREDITS`): (`INSUFFICIENT_CREDITS`): Your credit balance is insufficient.
+- **422 Unprocessable Entity** (`UNPROCESSABLE_CONTENT`): (`UNPROCESSABLE_CONTENT`): Invalid request. Possibly due to missing parameters or unsupported formats.
+- **500 Internal Server Error** (`INTERNAL_SERVER_ERROR`): (`INTERNAL_SERVER_ERROR`): Server encountered an error during processing.
+
+See [Handling Errors](/api-documentation/utilities/error) for the error response format and all error codes.
 
 ---
 

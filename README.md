@@ -20,8 +20,8 @@ The source for the [Wav](https://wav.com) Public API documentation, published wi
 - The product is **Wav**. Write it as `Wav` in prose and headings.
 - The audio format is a separate thing: write it `WAV` (like `MP3`, `FLAC`) and use
   `.wav` / `.mp3` for literal file extensions. Never write the format as `Wav`.
-- All hosts live on `wav.com`: `api.wav.com` for requests, `cdn1.wav.com` for generated
-  output and sample audio, `docs.wav.com` for this site.
+- Hosts: `api.wav.com` for requests and `docs.wav.com` for this site. Generated output and
+  sample audio are served from `cdn1.musicgpt.com` (there is no `cdn1.wav.com`).
 - Placeholder buckets in request examples (`mybucket.s3.amazonaws.com`) belong to the
   caller, not to us — leave them generic.
 

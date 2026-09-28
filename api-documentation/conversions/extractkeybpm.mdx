@@ -25,6 +25,8 @@ This endpoint analyzes an audio file to determine its musical key and BPM. You c
 | `audio_file`     | `File` | Optional | Upload the audio file directly. Either `audio_url` or `audio_file` must be provided. |
 | `webhook_url`    | `String`     | Optional | Callback URL for async response.                                           |
 
+> **Max input audio length:** 8 minutes. See [Audio Length Limits](/api-documentation/utilities/ratelimits#audio-length-limits).
+
 >**Note:** Either audio_file or audio_url must be provided.
 
 >**content-type:** multipart/form-data
@@ -40,7 +42,7 @@ This endpoint analyzes an audio file to determine its musical key and BPM. You c
 curl -X POST "https://api.wav.com/api/public/v1/extract_key_bpm" \
 -H "accept: application/json" \
 -H "Authorization: <api_key>" \
--F "audio_url=https://www.youtube.com/watch?v=jGflUbPQfW8" \
+-F "audio_url=<YOUR_AUDIO_URL>" \
 -F "webhook_url=https://example.com/my-webhook"
 ```
 
@@ -101,11 +103,12 @@ Once key and BPM extraction is completed, the webhook receives:
   "success": true, 
   "task_id": "69ec90f0-a00a-48f8-bdb3-8728a635e057", 
   "conversion_id": "8be8c439-dbc9-4ae6-8fe3-3fcb95f5a60a", 
-  "audio_path": "https://cdn1.wav.com/files/153ea693-aa7e-42cc-9e35-9a09cc011c4d.mp3",
+  "audio_path": "https://cdn1.musicgpt.com/files/153ea693-aa7e-42cc-9e35-9a09cc011c4d.mp3",
   "conversion_duration": "0", 
   "key_changes": {"0-120": ["A# major"], "120-140": ["D# major", "G minor"], "140-220": ["A# major", "A# minor"]}, 
   "dominant_key": "A# major", 
   "bpm": 162, 
+  "title": "Key BPM Extraction",
   "conversion_type": "Key BPM Extraction"
 }
 ```
@@ -113,8 +116,11 @@ Once key and BPM extraction is completed, the webhook receives:
 
 ## Common Errors
 
-- **422 Unprocessable Entity**: Both `audio_url` and `audio_file` cannot be `None`.
-- **500 Internal Server Error**: A server error occurred during processing.
+- **402 Payment Required** (`INSUFFICIENT_CREDITS`): (`INSUFFICIENT_CREDITS`): Your credit balance is insufficient.
+- **422 Unprocessable Entity** (`UNPROCESSABLE_CONTENT`): (`UNPROCESSABLE_CONTENT`): Both `audio_url` and `audio_file` cannot be `None`.
+- **500 Internal Server Error** (`INTERNAL_SERVER_ERROR`): (`INTERNAL_SERVER_ERROR`): A server error occurred during processing.
+
+See [Handling Errors](/api-documentation/utilities/error) for the error response format and all error codes.
 
 ---
 

@@ -23,10 +23,10 @@ This is the primary endpoint for initiating voice conversion tasks.
 ## Sample Output
 
 Listen to a real sample output:
-<audio controls="1" controlslist="nodownload nofullscreen noremoteplayback" src="https://cdn1.wav.com/projects/67092f68-045d-4e3c-8006-532f144dd610.mp3">Your browser does not support the audio playback.</audio>
+<audio controls="1" controlslist="nodownload nofullscreen noremoteplayback" src="https://cdn1.musicgpt.com/projects/standard/ffa2da3a-af79-4cbd-9cf6-ea178c9b2f90.mp3">Your browser does not support the audio playback.</audio>
 
 Output File:
-<a href="https://cdn1.wav.com/projects/67092f68-045d-4e3c-8006-532f144dd610.wav" target="_blank">Download Audio</a>
+<a href="https://cdn1.musicgpt.com/projects/standard/ffa2da3a-af79-4cbd-9cf6-ea178c9b2f90.mp3" target="_blank">Download Audio</a>
 
 ---
 
@@ -46,6 +46,8 @@ Visit the [VoiceChanger Endpoint Explorer](/api-documentation/endpoint/voicetovo
 | `remove_background`| `Integer`   | Optional | Set to `1` to remove background noise. Default is `0`.                      |
 | `pitch`            | `Integer`   | Optional | Adjust pitch between -12 and 12 semitones. Default is `0`.                  |
 | `webhook_url`      | `String`    | Optional | Callback URL for async response.                                            |
+
+> **Max input audio length:** 8 minutes. See [Audio Length Limits](/api-documentation/utilities/ratelimits#audio-length-limits).
 
 >**Note:** Either audio_file or audio_url must be provided.
 
@@ -125,20 +127,22 @@ print(response.json())
   "conversion_type": "Voice Conversion", 
   "task_id": "fdcca59e-9788-43fc-9ee6-e9983064c432", 
   "conversion_id": "67092f68-045d-4e3c-8006-532f144dd610", 
-  "conversion_path": "https://cdn1.wav.com/projects/standard/ffa2da3a-af79-4cbd-9cf6-ea178c9b2f90.mp3",
+  "conversion_path": "https://cdn1.musicgpt.com/projects/standard/ffa2da3a-af79-4cbd-9cf6-ea178c9b2f90.mp3",
   "conversion_cost": "0.78", 
   "conversion_duration": 272.44,
-  "message": "Conversion Completed",
+  "title": "Voice Conversion",
+  "message": "Conversion Completed"
 }
 ```
 ---
 
 ## Common Errors
 
-- **400 Bad Request**: Invalid or missing input file.
-- **402 Payment Required**: Your credit balance is insufficient.
-- **422 Unprocessable Entity**: No `audio_url` or `audio_file` provided.
-- **500 Internal Server Error**: Something went wrong on our end.
+- **402 Payment Required** (`INSUFFICIENT_CREDITS`): (`INSUFFICIENT_CREDITS`): Your credit balance is insufficient.
+- **422 Unprocessable Entity** (`UNPROCESSABLE_CONTENT`): (`UNPROCESSABLE_CONTENT`): Invalid or missing input file. No `audio_url` or `audio_file` provided.
+- **500 Internal Server Error** (`INTERNAL_SERVER_ERROR`): (`INTERNAL_SERVER_ERROR`): Something went wrong on our end.
+
+See [Handling Errors](/api-documentation/utilities/error) for the error response format and all error codes.
 
 ---
 
