@@ -594,3 +594,13 @@
   .wav-pro-card { padding: 1.25rem; }
   .wav-pro-card-title { font-size: 1.35rem; }
 }
+
+
+
+
+.wav-free-note {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--mg-text-muted);
+}
